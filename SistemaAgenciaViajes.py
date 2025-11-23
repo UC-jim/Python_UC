@@ -1,7 +1,5 @@
 # ============================================
 # SISTEMA DE GESTIÓN PARA AGENCIA DE VIAJES
-# CRUD de: Clientes, Tours, Reservas y Pagos
-# Estructura simple basada en menús
 # ============================================
 
 clientes = {}
@@ -342,3 +340,4 @@ def menu_principal():
             print("Opción inválida.")
 
 menu_principal()
+
