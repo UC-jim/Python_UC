@@ -2,7 +2,6 @@
 # SISTEMA DE GESTIÓN PARA AGENCIA DE VIAJES
 # ============================================
 
-# Diccionarios para almacenar la información de clientes, tours, reservas y pagos.
 clientes = {}
 tours = {}
 reservas = {}
@@ -12,22 +11,20 @@ pagos = {}
 # MÓDULO: CLIENTES
 # =======================
 
-# Función para agregar un nuevo cliente
 def agregar_cliente():
     print("\n--- Registrar Cliente ---")
-    cid = input("ID del cliente: ").strip()  # Solicitar ID del cliente
+    cid = input("ID del cliente: ").strip()
 
-    # Validación para evitar duplicados en los IDs de clientes
+    # Validación: evitar duplicados
     if cid in clientes:
         print("ERROR: Ese ID ya existe.")
         return
     
-    # Solicitar el nombre, DNI y correo del cliente
     nombre = input("Nombre completo: ")
     dni = input("DNI: ")
     correo = input("Correo: ")
 
-    # Almacenar los datos del cliente en el diccionario 'clientes'
+    # Guardar datos del cliente
     clientes[cid] = {
         "nombre": nombre,
         "dni": dni,
@@ -35,21 +32,21 @@ def agregar_cliente():
     }
     print("Cliente registrado con éxito.")
 
-# Función para buscar un cliente por su ID
+
 def buscar_cliente():
     print("\n--- Buscar Cliente ---")
-    cid = input("ID del cliente: ")  # Solicitar ID
-
-    # Verificar si el cliente existe en la base de datos
+    cid = input("ID del cliente: ")
+    
+    # Verificación de existencia
     if cid in clientes:
-        print(clientes[cid])  # Mostrar los datos del cliente
+        print(clientes[cid])
     else:
         print("No existe el cliente.")
 
-# Función para actualizar los datos de un cliente
+
 def actualizar_cliente():
     print("\n--- Actualizar Cliente ---")
-    cid = input("ID del cliente: ")  # Solicitar ID
+    cid = input("ID del cliente: ")
 
     if cid not in clientes:
         print("No existe ese cliente.")
@@ -59,7 +56,7 @@ def actualizar_cliente():
     nombre = input("Nuevo nombre: ")
     correo = input("Nuevo correo: ")
 
-    # Solo actualizar los campos que no estén vacíos
+    # Solo actualizar campos llenos
     if nombre.strip():
         clientes[cid]["nombre"] = nombre
     if correo.strip():
@@ -67,19 +64,19 @@ def actualizar_cliente():
 
     print("Cliente actualizado.")
 
-# Función para eliminar un cliente de la base de datos
+
 def eliminar_cliente():
     print("\n--- Eliminar Cliente ---")
     cid = input("ID del cliente: ")
 
-    # Eliminar al cliente si existe
+    # Eliminar si existe
     if cid in clientes:
         del clientes[cid]
         print("Cliente eliminado.")
     else:
         print("No existe el cliente.")
 
-# Función para listar todos los clientes registrados
+
 def listar_clientes():
     print("\n--- Lista de Clientes ---")
 
@@ -87,44 +84,44 @@ def listar_clientes():
         print("No hay clientes registrados.")
         return
     
-    # Mostrar los datos de cada cliente
+    # Mostrar todos los clientes
     for cid, data in clientes.items():
         print(f"{cid}: {data['nombre']} | DNI: {data['dni']} | Correo: {data['correo']}")
+
 
 # =======================
 # MÓDULO: TOURS
 # =======================
 
-# Función para agregar un nuevo tour
 def agregar_tour():
     print("\n--- Registrar Tour ---")
-    tid = input("ID del tour: ")  # Solicitar ID del tour
+    tid = input("ID del tour: ")
 
     if tid in tours:
         print("Ese tour ya existe.")
         return
 
     nombre = input("Nombre del tour: ")
-    precio = float(input("Precio: "))  # Solicitar precio del tour
+    precio = float(input("Precio: "))
 
-    # Almacenar el tour en el diccionario 'tours'
+    # Guardar tour
     tours[tid] = {"nombre": nombre, "precio": precio}
     print("Tour agregado.")
 
-# Función para buscar un tour por su ID
+
 def buscar_tour():
     print("\n--- Buscar Tour ---")
-    tid = input("ID del tour: ")  # Solicitar ID
+    tid = input("ID del tour: ")
 
     if tid in tours:
-        print(tours[tid])  # Mostrar los datos del tour
+        print(tours[tid])
     else:
         print("No existe el tour.")
 
-# Función para actualizar los detalles de un tour
+
 def actualizar_tour():
     print("\n--- Actualizar Tour ---")
-    tid = input("ID del tour: ")  # Solicitar ID
+    tid = input("ID del tour: ")
 
     if tid not in tours:
         print("Ese tour no existe.")
@@ -141,18 +138,18 @@ def actualizar_tour():
 
     print("Tour actualizado.")
 
-# Función para eliminar un tour
+
 def eliminar_tour():
     print("\n--- Eliminar Tour ---")
-    tid = input("ID del tour: ")  # Solicitar ID
+    tid = input("ID del tour: ")
 
     if tid in tours:
-        del tours[tid]  # Eliminar el tour del diccionario
+        del tours[tid]
         print("Tour eliminado.")
     else:
         print("No existe el tour.")
 
-# Función para listar todos los tours registrados
+
 def listar_tours():
     print("\n--- Lista de Tours ---")
 
@@ -163,11 +160,11 @@ def listar_tours():
     for tid, data in tours.items():
         print(f"{tid}: {data['nombre']} | Precio: {data['precio']}")
 
+
 # =======================
 # MÓDULO: RESERVAS
 # =======================
 
-# Función para crear una nueva reserva
 def crear_reserva():
     print("\n--- Crear Reserva ---")
     rid = input("ID de la reserva: ")
@@ -179,7 +176,7 @@ def crear_reserva():
     cid = input("ID del cliente: ")
     tid = input("ID del tour: ")
 
-    # Validaciones: comprobar si el cliente y el tour existen
+    # Validaciones
     if cid not in clientes:
         print("No existe el cliente.")
         return
@@ -188,10 +185,10 @@ def crear_reserva():
         print("No existe el tour.")
         return
 
-    reservas[rid] = {"cliente": cid, "tour": tid, "estado": "Pendiente"}  # Crear la reserva
+    reservas[rid] = {"cliente": cid, "tour": tid, "estado": "Pendiente"}
     print("Reserva creada correctamente.")
 
-# Función para cambiar el estado de una reserva (Pagado o Cancelado)
+
 def cambiar_estado_reserva():
     print("\n--- Cambiar Estado de Reserva ---")
     rid = input("ID de la reserva: ")
@@ -203,7 +200,6 @@ def cambiar_estado_reserva():
     print("1) Pagado  2) Cancelado")
     op = input("Nuevo estado: ")
 
-    # Actualizar el estado de la reserva según la opción elegida
     if op == "1":
         reservas[rid]["estado"] = "Pagado"
     elif op == "2":
@@ -214,7 +210,7 @@ def cambiar_estado_reserva():
 
     print("Estado actualizado.")
 
-# Función para listar todas las reservas
+
 def listar_reservas():
     print("\n--- Lista de Reservas ---")
 
@@ -225,11 +221,11 @@ def listar_reservas():
     for rid, data in reservas.items():
         print(f"{rid}: Cliente {data['cliente']} | Tour {data['tour']} | Estado: {data['estado']}")
 
+
 # =======================
 # MÓDULO: PAGOS
 # =======================
 
-# Función para registrar un pago
 def registrar_pago():
     print("\n--- Registrar Pago ---")
     pid = input("ID del pago: ")
@@ -247,14 +243,14 @@ def registrar_pago():
     monto = float(input("Monto: "))
     metodo = input("Método de pago: ")
 
-    pagos[pid] = {"reserva": rid, "monto": monto, "metodo": metodo}  # Registrar el pago
+    pagos[pid] = {"reserva": rid, "monto": monto, "metodo": metodo}
 
-    # Cambiar el estado de la reserva a "Pagado"
+    # Actualizar estado de reserva
     reservas[rid]["estado"] = "Pagado"
 
     print("Pago registrado.")
 
-# Función para listar todos los pagos
+
 def listar_pagos():
     print("\n--- Lista de Pagos ---")
 
@@ -265,12 +261,11 @@ def listar_pagos():
     for pid, data in pagos.items():
         print(f"{pid}: Reserva {data['reserva']} | Monto: {data['monto']} | Método: {data['metodo']}")
 
+
 # =======================
 # MENÚS
 # =======================
-# Funciones que muestran menús y permiten al usuario interactuar con el sistema.
 
-# Menú para gestionar clientes
 def menu_clientes():
     while True:
         print("\n--- MENÚ CLIENTES ---")
@@ -285,8 +280,63 @@ def menu_clientes():
         elif op == "0": break
         else: print("Opción inválida.")
 
-# Menú para gestionar tours
+
 def menu_tours():
     while True:
         print("\n--- MENÚ TOURS ---")
-        print("1) Ag
+        print("1) Agregar\n2) Buscar\n3) Actualizar\n4) Eliminar\n5) Listar\n0) Volver")
+        op = input("Opción: ")
+
+        if op == "1": agregar_tour()
+        elif op == "2": buscar_tour()
+        elif op == "3": actualizar_tour()
+        elif op == "4": eliminar_tour()
+        elif op == "5": listar_tours()
+        elif op == "0": break
+        else: print("Opción inválida.")
+
+
+def menu_reservas():
+    while True:
+        print("\n--- MENÚ RESERVAS ---")
+        print("1) Crear reserva\n2) Cambiar estado\n3) Listar\n0) Volver")
+        op = input("Opción: ")
+
+        if op == "1": crear_reserva()
+        elif op == "2": cambiar_estado_reserva()
+        elif op == "3": listar_reservas()
+        elif op == "0": break
+        else: print("Opción inválida.")
+
+
+def menu_pagos():
+    while True:
+        print("\n--- MENÚ PAGOS ---")
+        print("1) Registrar pago\n2) Listar pagos\n0) Volver")
+        op = input("Opción: ")
+
+        if op == "1": registrar_pago()
+        elif op == "2": listar_pagos()
+        elif op == "0": break
+        else: print("Opción inválida.")
+
+
+# =======================
+# MENÚ PRINCIPAL
+# =======================
+
+def menu_principal():
+    while True:
+        print("\n======= SISTEMA DE AGENCIA DE VIAJES =======")
+        print("1) Clientes\n2) Tours\n3) Reservas\n4) Pagos\n0) Salir")
+        op = input("Opción: ")
+
+        if op == "1": menu_clientes()
+        elif op == "2": menu_tours()
+        elif op == "3": menu_reservas()
+        elif op == "4": menu_pagos()
+        elif op == "0": break
+        else:
+            print("Opción inválida.")
+
+menu_principal()
